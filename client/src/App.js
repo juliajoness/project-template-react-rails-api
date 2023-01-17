@@ -26,7 +26,7 @@ function App() {
         <Route element={<Profile />} path="profile"/>
         <Route element={<Feed />} path="feed"/>
         <Route element={<AddCategory />} path="category"/>
-        <Route element={<Signup />} path="signup" setLoggedInUser={setUser} />
+        <Route element={<Signup />} path="signup" setLoggedInUser={setUser} updateUser={updateUser} />
       </Routes>
     </div>
   );

@@ -2,7 +2,7 @@ import { Form, Input, Container, Checkbox, Button } from 'semantic-ui-react'
 import { useState } from 'react'
 import { useNavigate } from'react-router-dom'
 
-function Signup ({setLoggedInUser}) {
+function Signup ({setLoggedInUser, updateUser}) {
 
     const [newUserSignup, setNewUserSignup] = useState(
         {
@@ -32,7 +32,7 @@ function Signup ({setLoggedInUser}) {
         .then(res => {
             if(res.ok){
                 res.json().then(user => {
-                    console.log(user)
+                    setLoggedInUser(user)
                     navigate(`/users/${user.id}`)
                 })
             }else {
