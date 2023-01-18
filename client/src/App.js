@@ -13,8 +13,20 @@ import Signup from "./Components/Signup";
 function App() {
 
   const [user, setUser] = useState(false);
-
+console.log('the current user is', user)
   const updateUser = (user) => setUser(user);
+
+  useEffect(() => {
+   fetch("authorized")
+     .then(res => {
+      if(res.ok) {
+        res.json()
+        .then(user => {
+          setUser(user)
+        })
+      }
+    })
+ }, []);
 
 
   return (
@@ -22,11 +34,11 @@ function App() {
       <Navbar />
       <Routes>
         <Route index element={<Home/>}/>
-        <Route element={<Login />} path="login" user={user} updateUser={updateUser} />
+        <Route element={<Login user={user} updateUser={updateUser}/>} path="login" />
         <Route element={<Profile />} path="profile"/>
         <Route element={<Feed />} path="feed"/>
         <Route element={<AddCategory />} path="category"/>
-        <Route element={<Signup />} path="signup" setLoggedInUser={setUser} updateUser={updateUser} />
+        <Route element={<Signup setLoggedInUser={setUser} updateUser={updateUser}/>} path="signup" />
       </Routes>
     </div>
   );

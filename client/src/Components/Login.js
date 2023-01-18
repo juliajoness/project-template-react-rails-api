@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import {NavLink, useNavigate} from 'react-router-dom'
+import {Navigate, NavLink, useNavigate} from 'react-router-dom'
 
 function Login ({updateUser, user}) {
     const [userToLogin, updateUserLoginInfo] = useState(
@@ -8,28 +8,40 @@ function Login ({updateUser, user}) {
             password: ''
         }
     )
+    const navigate = useNavigate()
+    const [errors, setErrors] = useState([])
 
-    const handleOnChangeUserToLogin =(sythE)=>{
-        updateUserLoginInfo({ ...userToLogin ,[sythE.target.name]: sythE.target.value })
-    }
+    const {username, password} = userToLogin
 
     const handleLoginSubmit = (sythE)=>{
         sythE.preventDefault()
-        
+        const user = {
+            username,
+            password
+        }
         fetch('/login',
         {
             method:"POST",
             headers: {"Content-Type": "application/json"},
-            body: JSON.stringify( userToLogin )
+            body: JSON.stringify( user )
             
         }
         )
-
-        .then((r) => r.json())
-        .then(hopfullyAUser => {
-            updateUserLoginInfo(hopfullyAUser)
-
+        .then(res => {
+            if(res.ok){
+                res.json().then(user => {
+                    updateUser(user)
+                    navigate(`/users/${user.id}`)
+                })
+            }else {
+                res.json().then(json => setErrors(Object.entries(json.error)))
+            }
         })
+       // .then((r) => r.json())
+       // .then(hopfullyAUser => {
+       //        updateUser(hopfullyAUser)
+
+      //  })
         
     }
     const handleLogOut = () => {
@@ -37,12 +49,14 @@ function Login ({updateUser, user}) {
         fetch('/logout', {method: 'DELETE'})
         .then(r => {
             if(r.ok){
-                console.log('log out')
-                updateUser(null)
+               console.log('log out')
+               updateUser(null)
             }
         })
     }
-
+    const handleOnChangeUserToLogin =(sythE)=>{
+        updateUserLoginInfo({ ...userToLogin ,[sythE.target.name]: sythE.target.value })
+    }
 
 return (
     <div className ="page-login">

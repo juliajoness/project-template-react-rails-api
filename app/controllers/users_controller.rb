@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
-    
-    rescue_from ActiveRecord::RecordNotFound, with: :user_not_found
-    rescue_from ActiveRecord::RecordInvalid, with: :user_unable_to_create
+
+    skip_before_action :authorized_user, only: [:create]
 
     def create 
         new_user = User.new(user_create_params)
@@ -19,8 +18,8 @@ class UsersController < ApplicationController
         end
     
         def show 
-            user_found = User.find_by(id: params[:id])
-            render json: user_found
+            # user_found = User.find_by(id: params[:id])
+            render json: current_user, status: :ok
         end 
 
     end

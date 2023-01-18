@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post 'users', to: 'users#create'
   
   post "login", to: "session#create"
-  get "/userInSession", to: "session#get_logged_in_user"
+  get "userInSession", to: "session#get_logged_in_user"
+  get 'authorized', to: 'users#show'
   
 end

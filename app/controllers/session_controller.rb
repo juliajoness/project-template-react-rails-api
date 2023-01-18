@@ -1,4 +1,5 @@
 class SessionController < ApplicationController
+    skip_before_action :authorized_user, only: [:create]
     def create
         user_to_find_login= User.find_by(username: params[:username] )
         if user_to_find_login 
@@ -9,11 +10,11 @@ class SessionController < ApplicationController
 
                 render json: user_to_find_login, status: :ok
             else
-                render json: {error: "Check password"}
+                render json: {error: "Check password"}, status: :unauthorized
             end
         
         else
-            render json: {error: "Username OR Password Doesn't Exist"}
+            render json: {error: "User not found"}, status: :not_found
         end
     end
 
