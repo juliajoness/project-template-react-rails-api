@@ -9,6 +9,7 @@ import Feed from "./Components/Feed";
 import Login from "./Components/Login";
 import Profile from "./Components/Profile";
 import Signup from "./Components/Signup";
+import StepsContainer from "./Components/StepsContainer";
 
 function App() {
 
@@ -29,6 +30,19 @@ console.log('these are the steps', steps)
       }
     })
  }, []);
+
+ useEffect(() => {
+  fetch("/steps")
+    .then(res => {
+     if(res.ok) {
+       res.json()
+       .then(step => {
+         setSteps(step)
+       })
+     }
+   })
+}, []);
+console.log(steps)
 
  function changeProfileState(changedProfileObj) {
   const changedUserArray = [...user];
@@ -68,7 +82,15 @@ const onAddStep = (newStep) => {
         <Route element={<Feed />} path="feed"/>
         <Route element={<AddCategory />} path="category"/>
         <Route element={<Signup setLoggedInUser={setUser} updateUser={updateUser}/>} path="signup" />
+        <Route element={<StepsContainer user={user} 
+        setUser={setUser} 
+        changeProfileState={changeProfileState}
+        updateUser={updateUser}
+        onAddStep={onAddStep}
+        steps={steps}
+        />} path="stepscontainer" />
       </Routes>
+
   }
     </div>
   );

@@ -2,13 +2,18 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { NavLink } from 'react-router-dom'
 import { Form, Input, Container, Button } from 'semantic-ui-react'
+import StepsContainer from './StepsContainer'
+import { Statistic } from 'semantic-ui-react'
 
 
 function Profile ({user, steps, onAddStep}) {
 
+
+
     const initialState = {
-        step_count: "",
         date: "",
+        step_count: "",
+
       };
 
       const [formData, setFormData] = useState(initialState);
@@ -37,27 +42,61 @@ function Profile ({user, steps, onAddStep}) {
       });
 
     }
+
+
     
 
     return (
         <div>
-            <h2>{user.username}</h2>
-            <p>{user.email}</p>
+            <Statistic.Group>
+      <Statistic>
+        <Statistic.Value>{user.username}</Statistic.Value>
+        <Statistic.Label>username</Statistic.Label>
+      </Statistic>
+      <Statistic>
+        <Statistic.Value>{user.email}</Statistic.Value>
+        <Statistic.Label>email</Statistic.Label>
+      </Statistic>
+    </Statistic.Group>
+
+    <h1>
+                {''}
+    </h1>
+            {/* <h2>{user.username}</h2>
+            <p>{user.email}</p> */}
+        <h2>
+            Add New Step:
+        </h2>
         <Form onSubmit={handleSubmit}>
-        <Form.Field>
-            <label>Step Count</label>
-            <input placeholder='Step Count' name="step_count"
-            onChange={handleChange}
-            />
-        </Form.Field>
         <Form.Field>
             <label>Date</label>
             <input placeholder='Date' name="date"
             onChange={handleChange}
             />
         </Form.Field>
+        <Form.Field>
+            <label>Step Count</label>
+            <input placeholder='Step Count' name="step_count"
+            onChange={handleChange}
+            />
+        </Form.Field>
         <Button type='submit'>Post Step</Button>
         </Form>
+        <div>
+            <h1>
+                {''}
+            </h1>
+            <h1>
+                {''}
+            </h1>
+          <h3>
+            My Steps:
+        </h3> 
+        <h4>
+                {''}
+        </h4>
+        </div>
+        <StepsContainer steps= {steps}/>
 
         </div>
     );

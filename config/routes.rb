@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get "/profile", to: "profile#index"
   
   post '/steps', to: "steps#create"
+  get '/steps', to: "steps#index"
   
-  
+  delete '/steps', to: "steps#destroy"
 end
