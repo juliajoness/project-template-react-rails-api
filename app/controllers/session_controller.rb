@@ -16,6 +16,7 @@ class SessionController < ApplicationController
         else
             render json: {error: "User not found"}, status: :not_found
         end
+
     end
 
     def get_logged_in_user
@@ -23,5 +24,12 @@ class SessionController < ApplicationController
     
         render json: user_already_logged_in
     
+    end
+
+    def destroy
+        session.delete :user_id
+        # byebug
+        # head :no_content
+        render json: {}
     end
 end

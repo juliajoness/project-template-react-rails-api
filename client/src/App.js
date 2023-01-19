@@ -17,7 +17,7 @@ console.log('the current user is', user)
   const updateUser = (user) => setUser(user);
 
   useEffect(() => {
-   fetch("authorized")
+   fetch("/authorized")
      .then(res => {
       if(res.ok) {
         res.json()
@@ -32,6 +32,7 @@ console.log('the current user is', user)
   return (
     <div>
       <Navbar />
+      {!user? <Login error={"please login"} updateUser={updateUser } /> :
       <Routes>
         <Route index element={<Home/>}/>
         <Route element={<Login user={user} updateUser={updateUser}/>} path="login" />
@@ -40,6 +41,7 @@ console.log('the current user is', user)
         <Route element={<AddCategory />} path="category"/>
         <Route element={<Signup setLoggedInUser={setUser} updateUser={updateUser}/>} path="signup" />
       </Routes>
+  }
     </div>
   );
 }

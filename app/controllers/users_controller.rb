@@ -11,6 +11,7 @@ class UsersController < ApplicationController
         else
             render json: { error: new_user.errors.full_messages}
         end
+    end
 
         def index
             users = User.all
@@ -18,11 +19,9 @@ class UsersController < ApplicationController
         end
     
         def show 
-            # user_found = User.find_by(id: params[:id])
+            user_found = User.find(session[:user_id])
             render json: current_user, status: :ok
         end 
-
-    end
 
 
     private 
