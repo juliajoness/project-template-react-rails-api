@@ -13,5 +13,10 @@ Rails.application.routes.draw do
   get 'authorized', to: 'users#show'
 
   delete "/logout", to: "session#destroy"
+
+  get "/profile", to: "profile#index"
+  
+  post '/steps', to: "steps#create"
+  
   
 end

@@ -15,7 +15,9 @@ function App() {
   const [user, setUser] = useState(false);
 console.log('the current user is', user)
   const updateUser = (user) => setUser(user);
+  const [steps, setSteps] = useState([])
 
+console.log('these are the steps', steps)
   useEffect(() => {
    fetch("/authorized")
      .then(res => {
@@ -28,15 +30,41 @@ console.log('the current user is', user)
     })
  }, []);
 
+ function changeProfileState(changedProfileObj) {
+  const changedUserArray = [...user];
+  const index = changedUserArray.findIndex(
+    (p) => p.id === changedProfileObj.profile_id
+  );
+  const newUserArray = changedUserArray[index].user.map((r) =>
+    r.id === changedProfileObj.id ? changedProfileObj : r
+  );
+  changedUserArray[index].user = newUserArray;
+  setUser(changedUserArray);
+}
+
+
+const onAddStep = (newStep) => {
+  setSteps((steps) => [...steps, newStep]);
+};
+
 
   return (
-    <div>
+    <div className="app">
+      <header />
       <Navbar />
       {!user? <Login error={"please login"} updateUser={updateUser } /> :
       <Routes>
         <Route index element={<Home/>}/>
         <Route element={<Login user={user} updateUser={updateUser}/>} path="login" />
-        <Route element={<Profile />} path="profile"/>
+        <Route element={
+        <Profile 
+        user={user} 
+        setUser={setUser} 
+        changeProfileState={changeProfileState}
+        updateUser={updateUser}
+        onAddStep={onAddStep}
+        steps={steps}
+        />} path="profile"/>
         <Route element={<Feed />} path="feed"/>
         <Route element={<AddCategory />} path="category"/>
         <Route element={<Signup setLoggedInUser={setUser} updateUser={updateUser}/>} path="signup" />
