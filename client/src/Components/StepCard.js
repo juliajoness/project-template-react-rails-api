@@ -2,14 +2,30 @@ import { Item } from 'semantic-ui-react'
 import { Statistic } from 'semantic-ui-react'
 import { Card } from 'semantic-ui-react'
 
-function StepCard({step_count, date}) {
+function StepCard({ 
+    step: { date, step_count, id},
+    // step_count, date, 
+    removeStep, step}) {
 
+        function handleDeleteClick() {
+            fetch(`/steps/${id}`, {
+              method: "DELETE",
+            });
+            removeStep(id);
+          }
+const handleTrash = () => {
+    removeStep(step)
+}
 
     return (
-<Card.Group>
-    <Card> date: {date} steps: {step_count} </Card>
-  </Card.Group>
-
+        <div>
+            <Card.Group>
+                <Card> date: {date} steps: {step_count} </Card>
+            </Card.Group>
+            <button onClick={handleTrash} className="emoji-button delete">
+          🗑
+        </button>
+        </div>
 
 /* <div>
     

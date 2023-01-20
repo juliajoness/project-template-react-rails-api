@@ -17,7 +17,8 @@ class StepsController < ApplicationController
     def destroy
         step = Step.find_by(id: params[:id])
         if step
-
+            step.destroy
+            head :no_content
         else
             render json: { error: "step not found" }, status: :not_found
         end

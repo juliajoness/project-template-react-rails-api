@@ -1,10 +1,10 @@
 import StepCard from "./StepCard";
 //import Navbar from "./Components/Navbar";
 
-function StepsContainer({steps, onAddStep, setUser, user, changeProfileState, updateUser}){
+function StepsContainer({steps, removeStep}){
 
     const stepsArray = steps.map(step => {
-       return <StepCard key={step.id} {...step}/>
+       return <StepCard removeStep={removeStep} key={step.id} {...step} step={step}/>
     });
 
     return (

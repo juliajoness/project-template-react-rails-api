@@ -19,6 +19,17 @@ console.log('the current user is', user)
   const [steps, setSteps] = useState([])
 
 console.log('these are the steps', steps)
+
+  const removeStep = doomedStepObj => {
+
+  const newSteps = steps.filter( step => {
+    return doomedStepObj.id !== step.id
+})
+
+  setSteps (newSteps)
+
+}
+
   useEffect(() => {
    fetch("/authorized")
      .then(res => {
@@ -88,6 +99,7 @@ const onAddStep = (newStep) => {
         updateUser={updateUser}
         onAddStep={onAddStep}
         steps={steps}
+        removeStep={removeStep}
         />} path="stepscontainer" />
       </Routes>
 
