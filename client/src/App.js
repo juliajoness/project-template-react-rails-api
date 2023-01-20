@@ -10,25 +10,25 @@ import Login from "./Components/Login";
 import Profile from "./Components/Profile";
 import Signup from "./Components/Signup";
 import StepsContainer from "./Components/StepsContainer";
+import ShowChosenStep from './Components/ShowChosenStep';
 
 function App() {
 
   const [user, setUser] = useState(false);
-console.log('the current user is', user)
+
+    console.log('the current user is', user)
+
   const updateUser = (user) => setUser(user);
   const [steps, setSteps] = useState([])
 
-console.log('these are the steps', steps)
+    // console.log('these are the steps', steps)
 
-  const removeStep = doomedStepObj => {
-
-  const newSteps = steps.filter( step => {
-    return doomedStepObj.id !== step.id
-})
-
-  setSteps (newSteps)
-
-}
+    const removeStep = doomedStepObj => {
+      const newSteps = steps.filter( step => {
+        return doomedStepObj.id !== step.id
+      })
+      setSteps (newSteps)
+    }
 
   useEffect(() => {
    fetch("/authorized")
@@ -40,9 +40,9 @@ console.log('these are the steps', steps)
         })
       }
     })
- }, []);
+  }, []);
 
- useEffect(() => {
+  useEffect(() => {
   fetch("/steps")
     .then(res => {
      if(res.ok) {
@@ -50,60 +50,54 @@ console.log('these are the steps', steps)
        .then(step => {
          setSteps(step)
        })
-     }
-   })
-}, []);
-console.log(steps)
+      }
+    })
+  }, []);
 
- function changeProfileState(changedProfileObj) {
-  const changedUserArray = [...user];
-  const index = changedUserArray.findIndex(
-    (p) => p.id === changedProfileObj.profile_id
-  );
-  const newUserArray = changedUserArray[index].user.map((r) =>
-    r.id === changedProfileObj.id ? changedProfileObj : r
-  );
-  changedUserArray[index].user = newUserArray;
-  setUser(changedUserArray);
-}
+  // console.log(steps)
 
+  function changeProfileState(changedProfileObj) {
+    setUser(changedProfileObj)
+  }
 
-const onAddStep = (newStep) => {
-  setSteps((steps) => [...steps, newStep]);
-};
+  const onAddStep = (newStep) => {
+    setSteps((steps) => [...steps, newStep]);
+  };
 
-
+  console.log(user)
   return (
     <div className="app">
       <header />
-      <Navbar />
-      {!user? <Login error={"please login"} updateUser={updateUser } /> :
-      <Routes>
-        <Route index element={<Home/>}/>
-        <Route element={<Login user={user} updateUser={updateUser}/>} path="login" />
-        <Route element={
-        <Profile 
-        user={user} 
-        setUser={setUser} 
-        changeProfileState={changeProfileState}
-        updateUser={updateUser}
-        onAddStep={onAddStep}
-        steps={steps}
-        />} path="profile"/>
-        <Route element={<Feed />} path="feed"/>
-        <Route element={<AddCategory />} path="category"/>
-        <Route element={<Signup setLoggedInUser={setUser} updateUser={updateUser}/>} path="signup" />
-        <Route element={<StepsContainer user={user} 
-        setUser={setUser} 
-        changeProfileState={changeProfileState}
-        updateUser={updateUser}
-        onAddStep={onAddStep}
-        steps={steps}
-        removeStep={removeStep}
-        />} path="stepscontainer" />
-      </Routes>
-
-  }
+        <Navbar />
+          {/* <Login error={"please login"} updateUser={updateUser } />  */}
+          <Routes>
+            <Route index element={<Home/>}/>
+            <Route path="login" element={<Login user={user} updateUser={updateUser}/>} />
+            <Route path="profile" element={
+              <Profile 
+              removeStep={removeStep}
+              user={user} 
+              setUser={setUser} 
+              changeProfileState={changeProfileState}
+              updateUser={updateUser}
+              onAddStep={onAddStep}
+              steps={steps}
+            />}/>
+            <Route path="feed" element={<Feed />}/>
+            <Route path="chosenstep" element={<ShowChosenStep />}/>
+            <Route path="category" element={<AddCategory />} />
+            <Route path="signup" element={<Signup setLoggedInUser={setUser} updateUser={updateUser}/>} />
+            <Route path="stepscontainer" element={
+              <StepsContainer 
+              user={user} 
+              setUser={setUser} 
+              changeProfileState={changeProfileState}
+              updateUser={updateUser}
+              onAddStep={onAddStep}
+              steps={steps}
+              removeStep={removeStep}
+            />}/>
+          </Routes>
     </div>
   );
 }

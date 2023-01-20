@@ -1,9 +1,9 @@
-import { Form, Input, Container, Checkbox, Button } from 'semantic-ui-react'
+import { Form, Button } from 'semantic-ui-react'
 import { useState } from 'react'
 import { useNavigate } from'react-router-dom'
 
 function Signup ({setLoggedInUser, updateUser}) {
-
+console.log("the signup component is the signup component")
     const [newUserSignup, setNewUserSignup] = useState(
         {
             username: '',
@@ -41,20 +41,9 @@ function Signup ({setLoggedInUser, updateUser}) {
         })
     }
 
-    const [newUserName, setNewUserName] = useState('')
-    const [newEmail, setNewEmail] = useState('')
-    const [newPassword, setNewPassword] = useState('')
-
     const handleOnChangeSignup =(sythE)=>{
         setNewUserSignup({ ...newUserSignup ,[sythE.target.name]: sythE.target.value })
     }
-
-    const updatedSignup ={
-        newUserName,
-        newEmail,
-        newPassword
-    }
-console.log(newUserName, newEmail, newPassword)
     return (
         <div>
         <Form onSubmit={handleSignupSubmit}>

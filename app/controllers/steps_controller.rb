@@ -27,7 +27,7 @@ class StepsController < ApplicationController
     private
 
     def new_step_params
-        params.permit(:step_count, :date)
+        params.permit(:step_count, :date, :category_tag)
     end
 
 end

@@ -1,21 +1,13 @@
-import { Item } from 'semantic-ui-react'
-import { Statistic } from 'semantic-ui-react'
 import { Card } from 'semantic-ui-react'
+import { NavLink } from 'react-router-dom'
+function StepCard({date, step_count, id, removeStep, step}) {
 
-function StepCard({ 
-    step: { date, step_count, id},
-    // step_count, date, 
-    removeStep, step}) {
 
-        function handleDeleteClick() {
-            fetch(`/steps/${id}`, {
-              method: "DELETE",
-            });
-            removeStep(id);
-          }
-const handleTrash = () => {
-    removeStep(step)
+    const handleTrash = () => {
+        fetch(`/steps/${id}`, {method: "DELETE",});
+        removeStep(step)
 }
+console.log(step)
 
     return (
         <div>
@@ -25,6 +17,13 @@ const handleTrash = () => {
             <button onClick={handleTrash} className="emoji-button delete">
           🗑
         </button>
+        <NavLink className="button" role="button" to="/category">
+        <button className ="ui primary labeled icon button" type="submit">        
+            <i className= "hand point right outline"></i>
+            Add Categroy
+        </button>
+    
+        </NavLink>
         </div>
 
 /* <div>
