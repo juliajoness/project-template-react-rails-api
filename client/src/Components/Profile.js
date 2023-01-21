@@ -13,7 +13,7 @@ function Profile ({removeStep, user, steps, onAddStep, updateUser, changeProfile
   const [username, setUsername] = useState ("")
   const [email, setEmail] = useState ("")
   const [password, setPassword] = useState ("")
-  const [erros, setErrors] = useState ("")
+  const [erros, setErrors] = useState ([])
   const{date, step_count} = formData
 
   const handleChange = (e) => {
@@ -33,12 +33,12 @@ function Profile ({removeStep, user, steps, onAddStep, updateUser, changeProfile
           body: JSON.stringify(newUpdateStepInfo),
       }).then((r) => {
       if (r.ok){
-        r.json().then((step) => {;
+        r.json().then((step) => {
           onAddStep(step)
           setFormData(initialState)
         })
       } else {
-        r.json().then((json) => setErrors(json.error));
+        r.json().then((json) => setErrors(json.errors));
       }
       });
   }

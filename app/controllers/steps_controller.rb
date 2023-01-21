@@ -10,7 +10,7 @@ class StepsController < ApplicationController
         if step_new.save
             render json: step_new
         else
-            render json: {"errors": "missing form field"}
+            render json: {"errors": "missing form field"}, status: 422
         end
     end
 
@@ -27,7 +27,7 @@ class StepsController < ApplicationController
     private
 
     def new_step_params
-        params.permit(:step_count, :date, :category_tag)
+        params.permit(:step_count, :date)
     end
 
 end
