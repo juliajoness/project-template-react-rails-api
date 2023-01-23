@@ -30,6 +30,14 @@ function App() {
       setSteps (newSteps)
     }
 
+    const showChosenStep = chosenStepObj => {
+      const chosenStep = steps.filter( step => {
+        return chosenStepObj.id !== step.id
+    })
+    setSteps (chosenStep)
+  }
+
+
   useEffect(() => {
    fetch("/authorized")
      .then(res => {
@@ -84,7 +92,10 @@ function App() {
               steps={steps}
             />}/>
             <Route path="feed" element={<Feed />}/>
-            <Route path="chosenstep" element={<ShowChosenStep />}/>
+            <Route path="chosenstep" element={<ShowChosenStep
+            steps={steps} 
+            showChosenStep={showChosenStep}
+            />}/>
             <Route path="category" element={<AddCategory />} />
             <Route path="signup" element={<Signup setLoggedInUser={setUser} updateUser={updateUser}/>} />
             <Route path="stepscontainer" element={
@@ -96,6 +107,7 @@ function App() {
               onAddStep={onAddStep}
               steps={steps}
               removeStep={removeStep}
+              showChosenStep={showChosenStep}
             />}/>
           </Routes>
     </div>

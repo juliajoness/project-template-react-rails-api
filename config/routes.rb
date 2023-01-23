@@ -24,4 +24,6 @@ Rails.application.routes.draw do
   delete '/steps', to: "steps#destroy"
 
   patch '/users/:id', to: "users#update"
+
+  get "/steps/:id", to: "steps#show"
 end

@@ -4,6 +4,11 @@ class StepsController < ApplicationController
         render json: Step.all, status: :ok
     end
 
+    def show
+        step = Step.find_by(id: params[:id])
+        render json: step, status: :ok
+    end
+
     def create
         step_new = Step.new(new_step_params)
         step_new.user = current_user

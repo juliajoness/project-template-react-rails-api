@@ -1,12 +1,16 @@
 import { Card } from 'semantic-ui-react'
 import { NavLink } from 'react-router-dom'
-function StepCard({date, step_count, id, removeStep, step}) {
+function StepCard({date, step_count, id, removeStep, step, showChosenStep}) {
 
 
     const handleTrash = () => {
         fetch(`/steps/${id}`, {method: "DELETE",});
         removeStep(step)
 }
+    const showTheChosenStep = () => {
+      fetch(`/steps/${id}`, {method: "GET",});
+      showChosenStep(step)
+    }
 console.log(step)
 
     return (
@@ -17,8 +21,8 @@ console.log(step)
             <button onClick={handleTrash} className="emoji-button delete">
           🗑
         </button>
-        <NavLink className="button" role="button" to="/category">
-        <button className ="ui primary labeled icon button" type="submit">        
+        <NavLink className="button" role="button" to="/chosenstep">
+        <button onClick={showTheChosenStep} className ="ui primary labeled icon button" type="submit">        
             <i className= "hand point right outline"></i>
             Add Categroy
         </button>
