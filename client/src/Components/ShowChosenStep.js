@@ -1,16 +1,29 @@
 import StepCard from "./StepCard";
 import React, { useState, useEffect } from "react";
-function ShowChosenStep ({date, step_count, id, step, steps}) {
+import {useParams} from "react-router-dom"
+function ShowChosenStep ({date, step_count}) {
+    const {id} = useParams()
+    console.log(id)
+    const [selectedStep, setSelectedStep] = useState("")
+
 // steps/:id
-// list all categories with buttons that add to step 
-// const oneStep = () => {
-//     fetch(`/steps/${id}`, {method: "GET",});
-//     removeStep(step)
-// }
-console.log(step)
+// list all categories with buttons that add to step
+    useEffect(() => {
+        fetch(`/steps/${id}`)
+            .then (r => {
+                if(r.ok) {
+                    r.json()
+                    .then(selectedStep => {
+                    setSelectedStep(selectedStep)
+                        })
+                    }
+                })
+        }, []);
+//console.log(step)
     return (
         <div>
-            <StepCard/>
+            <h1>{selectedStep.step_count} {selectedStep.date} </h1>
+            {/* <StepCard/> */}
         </div>
     )
 }

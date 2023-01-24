@@ -92,9 +92,8 @@ function App() {
               steps={steps}
             />}/>
             <Route path="feed" element={<Feed />}/>
-            <Route path="chosenstep" element={<ShowChosenStep
-            steps={steps} 
-            showChosenStep={showChosenStep}
+            <Route path="step/:id" element={<ShowChosenStep
+            steps={steps}
             />}/>
             <Route path="category" element={<AddCategory />} />
             <Route path="signup" element={<Signup setLoggedInUser={setUser} updateUser={updateUser}/>} />
