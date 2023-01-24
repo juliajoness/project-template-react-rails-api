@@ -10,12 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_20_160508) do
+ActiveRecord::Schema.define(version: 2023_01_24_144443) do
 
   create_table "categories", force: :cascade do |t|
     t.string "category_tag"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "step_categories", force: :cascade do |t|
+    t.integer "step_id", null: false
+    t.integer "category_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["category_id"], name: "index_step_categories_on_category_id"
+    t.index ["step_id"], name: "index_step_categories_on_step_id"
   end
 
   create_table "steps", force: :cascade do |t|
@@ -35,5 +44,7 @@ ActiveRecord::Schema.define(version: 2023_01_20_160508) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "step_categories", "categories"
+  add_foreign_key "step_categories", "steps"
   add_foreign_key "steps", "users"
 end

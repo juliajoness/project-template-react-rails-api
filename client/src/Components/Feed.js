@@ -1,20 +1,16 @@
 import React from "react";
 
 function Feed () {
-    // const [feed, setFeed] = useState([]);
-   
+// const [feed, setFeed] = useState([]);
 
 //     useEffect(() => {
-//     fetch("/steps/$",
-//         method:"PATCH",
-//         headers: {"Content-Type": "application/json"},
-//         body: JSON.stringify(newProfileInfo)
-//     })
-//     .then(res => res.json())
-//     .then((info) => {
-//         changeProfileState(info)
-//     })
-//   })
+//         fetch(`/steps/${id}`)
+//             .then (r => {
+//                 if(r.ok) {
+//                     r.json().then(feed => setFeed(feed))
+//                 }
+//             })
+//         }, []);
     //    .then(res => {
     //     if(res.ok) {
     //       res.json()
