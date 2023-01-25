@@ -70,78 +70,90 @@ function Profile ({removeStep, user, steps, onAddStep, updateUser, changeProfile
 
   return (
     <div>
-      <Statistic.Group>
-        <Statistic>
-          <Statistic.Value>{user.username}</Statistic.Value>
-          <Statistic.Label>username</Statistic.Label>
-        </Statistic>
-        <Statistic>
-          <Statistic.Value>{user.email}</Statistic.Value>
-          <Statistic.Label>email</Statistic.Label>
-        </Statistic>
-      </Statistic.Group>
-      <h1>
-       {''}
-      </h1>
-      <Form >
-        <Form.Field required>
-          <label>Username</label>
-          <input placeholder="Username"value={onUpdate.username} onChange={(e) => setUsername(e.target.value)} />
-        </Form.Field>
-        <Form.Field required>
-          <label>Email</label>
-          <input placeholder="Email"value={onUpdate.email} onChange={(e) => setEmail(e.target.value)} />
-        </Form.Field>
-        <Form.Field required>
-          <label>Password</label>
-          <input placeholder="Password" type="password "value={onUpdate.password} onChange={(e) => setPassword(e.target.value)} />
-        </Form.Field>
-                
-        <Button onClick={onUpdate}>Update information</Button>
-        {/* <Button onClick={(e) => onDelete(user.id)}>Delete Account</Button> */}
-      </Form>
-
-        <h1>
-          {''}
-        </h1>
-          <h2>
-            Add New Step:
-          </h2>
-        <Form onSubmit={handleSubmit}>
-        <Form.Field>
-            <label>Date</label>
-            <input placeholder='Date' name="date"
-            onChange={handleChange}
-            value={formData.date}
-            />
-        </Form.Field>
-        <Form.Field>
-            <label>Step Count</label>
-            <input placeholder='Step Count' name="step_count"
-            onChange={handleChange}
-            value={formData.step_count}
-            />
-        </Form.Field>
-        <Button type='submit'>Post Step</Button>
-        </Form>
-        <div>
-            <h1>
-                {''}
-            </h1>
-            <h1>
-                {''}
-            </h1>
-          <h3>
-            My Steps:
-        </h3> 
-        <h4>
-                {''}
-        </h4>
+      <div class="ui cards">
+        <div class="card">
+          <div class="content">
+            <div class="header">{user.username}</div>
+            <div class="meta">username</div>
+          </div>
         </div>
-        <StepsContainer removeStep={removeStep} steps= {steps}/>
-
+      </div>
+  <div class="ui cards">
+  <div class="card">
+    <div class="content">
+      <div class="header">{user.email}</div>
+      <div class="meta">email</div>
+    </div>
+  </div>
+  </div>
+  <div>
+          <h1>
+            {''}
+          </h1>
         </div>
-    );
+          <div className="user-update-info-container">
+            <Form >
+              <Form.Field required>
+                <label>Username</label>
+                <input placeholder="Username"value={onUpdate.username} onChange={(e) => setUsername(e.target.value)} />
+              </Form.Field>
+              <Form.Field required>
+                <label>Email</label>
+                <input placeholder="Email"value={onUpdate.email} onChange={(e) => setEmail(e.target.value)} />
+              </Form.Field>
+               <Form.Field required>
+                <label>Password</label>
+                <input placeholder="Password" type="password" value={onUpdate.password} onChange={(e) => setPassword(e.target.value)} />
+              </Form.Field>
+                <Button onClick={onUpdate}>Update information</Button>
+                {/* <Button onClick={(e) => onDelete(user.id)}>Delete Account</Button> */}
+            </Form>
+          </div>
+            <div>
+
+              <h1>
+              {''}
+              </h1>
+            </div>
+              <div className="add-new-step-container">
+                <h2>
+                  Add New Step:
+                </h2>
+                <Form onSubmit={handleSubmit}>
+                  <Form.Field>
+                    <label>Date</label>
+                    <input placeholder='Date' name="date"
+                      onChange={handleChange}
+                      value={formData.date}
+                    />
+                  </Form.Field>
+                  <Form.Field>
+                    <label>Step Count</label>
+                    <input placeholder='Step Count' name="step_count"
+                      onChange={handleChange}
+                      value={formData.step_count}
+                    />
+                  </Form.Field>
+                    <Button type='submit'>Post Step</Button>
+                </Form>
+              </div>
+              <div className="show-steps">
+                  <h1>
+                    {''}
+                  </h1>
+                    <h1>
+                      {''}
+                    </h1>
+                      <h3>
+                        My Steps:
+                      </h3> 
+                        <h4>
+                          {''}
+                        </h4>
+                  <StepsContainer removeStep={removeStep} steps= {steps}/>
+              </div>
+    </div>
+    )
 }
 
 export default Profile
