@@ -144,9 +144,9 @@ function Profile ({removeStep, user, steps, onAddStep, updateUser, changeProfile
                     <h1>
                       {''}
                     </h1>
-                      <h3>
-                        My Steps:
-                      </h3> 
+                      <h1>
+                        My Step Posts:
+                      </h1> 
                         <h4>
                           {''}
                         </h4>

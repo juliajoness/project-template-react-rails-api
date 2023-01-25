@@ -13,18 +13,56 @@ console.log(showChosenStep)
         <div>
             <Card.Group>
                 <Card> date: {date} steps: {step_count} </Card>
+                <div class="ui buttons">
+                  <button onClick={handleTrash} class="ui button">
+                    Discard
+                  </button>
+                  <div class="or"></div>
+                  <button> 
+                  <NavLink className="button" to={`/step/${id}`}
+                    class="ui positive button">
+                      Add Category
+                  </NavLink>
+                  </button>
+              </div>
             </Card.Group>
-            <button onClick={handleTrash} className="emoji-button delete">
-          🗑
-        </button>
-        <NavLink className="button" to={`/step/${id}`}>
-          <button className ="ui primary labeled icon button" >        
-              <i className= "hand point right outline"></i>
-              Add Categroy
-          </button>
+          </div>
+
+//  {/* <button onClick={handleTrash} class= "ui primary button">
+//                   Discard
+//                 </button>
+//                 <h1> {''} </h1>
+//         <NavLink className="button" to={`/step/${id}`}>
+//           <button class ="ui primary button" >
+//               Add Categroy
+//           </button>
+//         </NavLink> */}
+
+
+            // <div class="ui buttons">
+            //       <button onClick={handleTrash} class="ui button">
+            //         Discard
+            //       </button>
+            //       <div class="or"></div>
+            //       <NavLink className="button" to={`/step/${id}`}
+            //       <button> 
+            //         class="ui positive button">Add Category</button>
+            //       </NavLink>
+            //   </div>
+
+
+
+        //     {/* <button onClick={handleTrash} className="emoji-button delete">
+        //   🗑
+        // </button> */}
+        // {/* <NavLink className="button" to={`/step/${id}`}>
+        //   <button className ="ui primary labeled icon button" >        
+        //       <i className= "hand point right outline"></i>
+        //       Add Categroy
+        //   </button>
     
-        </NavLink>
-        </div>
+        // </NavLink> */}
+        
 
 /* <div>
     
